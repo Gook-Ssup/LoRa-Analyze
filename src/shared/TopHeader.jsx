@@ -1,9 +1,9 @@
 import React from "react";
 import { AppBar, Tabs, Tab, Button } from "@material-ui/core";
 import { Home, Map, Poll } from "@material-ui/icons";
-import { Link } from "react-router-dom";
-
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
+// import { createBrowserHistory } from "history";
 
 const StyledAppBar = styled(AppBar)`
   && {
@@ -26,7 +26,7 @@ const LoginButton = styled(Button)`
     color: #88bbff;
 
     &:hover {
-      background: rgba(250, 150, 170, 0.8);
+      background: rgba(150, 170, 250, 0.8);
       color: white;
     }
   }
@@ -42,21 +42,26 @@ const LoginButton = styled(Button)`
 
 const TopHeader = () => {
   const [value, setValue] = React.useState(0);
+  const history = useHistory();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const onClickLink = (path) => {
+    history.push(path);
   };
 
   return (
     <>
       <StyledAppBar position="absolute">
         <Tabs value={value} onChange={handleChange}>
-          <Tab label="Home" icon={<Home />} href="/"/>
-          <Tab label="Map" icon={<Map />} href="network-map"/>
+          <Tab label="Home" icon={<Home />} onClick={()=>{onClickLink("/")}}/>
+          <Tab label="Map" icon={<Map />} onClick={()=>{onClickLink("/network-map")}}/>
           <Tab label="Analyze" icon={<Poll />} />
         </Tabs>
         <LoginButton variant="outlined">
-          <Link to="/login" />
+          <Link to="/" />
           Login
         </LoginButton>
       </StyledAppBar>

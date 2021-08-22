@@ -8,9 +8,9 @@ import TopHeader from "shared/TopHeader";
 function App() {
   return (
     <BrowserRouter>
-	  <TopHeader />
+      <TopHeader />
       <Route exact path="/" component={Home} />
-	  <Route exact path="/network-map" component={NetworkMap} />
+      <Route exact path="/network-map" component={NetworkMap} />
     </BrowserRouter>
   );
 }

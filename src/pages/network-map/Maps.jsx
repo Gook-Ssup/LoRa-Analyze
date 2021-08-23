@@ -37,7 +37,7 @@ function Maps() {
 
   let Markers = gatewayList.map((gateway, index) => (
     <Marker key={gateway.id} position={[gateway.latitude, gateway.longitude]}>
-      <Popup>{gateway.name + '[' + gateway.id.toString() + ']'}</Popup>
+      <Popup>{gateway.name + '[' + gateway._id.toString() + ']'}</Popup>
     </Marker>
   ));
 

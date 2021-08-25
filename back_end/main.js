@@ -16,11 +16,11 @@ const app = express();
 app.use(bodyParser.json());
 
 // ROUTING
-const mapAPI = require("./routes/v0/api/map.js");
+const API = require("./routes/v0/api/general.js");
 //
 
 // api
-app.use("/v0/api/map", mapAPI);
+app.use("/v0/api/general", API);
 //
 
 // db connect

@@ -1,6 +1,6 @@
 import React from "react";
 import { AppBar, Tabs, Tab, Button } from "@material-ui/core";
-import { Home, Map, Poll } from "@material-ui/icons";
+import { Home, Map, Poll, PinDrop } from "@material-ui/icons";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 // import { createBrowserHistory } from "history";
@@ -59,6 +59,7 @@ const TopHeader = () => {
           <Tab label="Home" icon={<Home />} onClick={()=>{onClickLink("/")}}/>
           <Tab label="Map" icon={<Map />} onClick={()=>{onClickLink("/network-map")}}/>
           <Tab label="Analyze" icon={<Poll />} />
+          <Tab label="Gateways" icon={<PinDrop />} onClick={()=>{onClickLink("/gateways")}}/>
         </Tabs>
         <LoginButton variant="outlined">
           <Link to="/" />

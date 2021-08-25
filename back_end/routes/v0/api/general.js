@@ -20,10 +20,25 @@ router.get("/gateways", async (req, res, next) => {
   }
 });
 
-router.put("/gateways", async (req, res, next) => {
+router.put("/gateway", async (req, res, next) => {
   try {
-    let {name, latitude, longitude} = req.params;
+    let { name, latitude, longitude } = req.body;
     console.log(name, latitude, longitude);
+    Gateway.create(
+      {
+        name,
+        latitude,
+        longitude,
+      },
+      function (err) {
+        if (err) {
+          console.log(error);
+          return res.json({ success: false });
+        } else {
+          return res.json({ success: true });
+        }
+      }
+    );
   } catch (error) {
     console.log(error);
     return res.json({ success: false });

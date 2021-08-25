@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const shared_url = "/v0/api"
+const shared_url = "/v0/api";
 
 // Gateways
 async function GENERAL_GET_GATEWAYS() {
@@ -19,14 +19,14 @@ async function GENERAL_GET_GATEWAYS() {
   }
 }
 
-async function GENERAL_ADD_GATEWAY({name, latitude, longitude}) {
+async function GENERAL_ADD_GATEWAY({ name, latitude, longitude }) {
   const API_REQUEST = {
     method: "PUT",
     url: shared_url + "/general/gateway",
     data: {
-      name: "LabGateways(USPR)",
-      latitude: 35.235102456647034,
-      longitude: 129.0828258896565
+      name,
+      latitude,
+      longitude,
     },
     headers: {
       // 'x-access-token': accessToken,
@@ -45,10 +45,8 @@ async function GENERAL_ADD_GATEWAY({name, latitude, longitude}) {
 const REQUEST = {
   general: {
     getGateways: GENERAL_GET_GATEWAYS,
-    addGateway: GENERAL_ADD_GATEWAY
-  }
+    addGateway: GENERAL_ADD_GATEWAY,
+  },
 };
 
 export default REQUEST;
-
-

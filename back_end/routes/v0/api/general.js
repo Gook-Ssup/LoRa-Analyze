@@ -32,7 +32,7 @@ router.put("/gateway", async (req, res, next) => {
       },
       function (err) {
         if (err) {
-          console.log(error);
+          console.log(err);
           return res.json({ success: false });
         } else {
           return res.json({ success: true });

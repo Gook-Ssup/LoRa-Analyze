@@ -14,7 +14,7 @@ function Maps() {
   const [reload, setReload] = useState(false);
 
   useEffect(() => {
-    REQUEST.map.getGateways().then((result) => {
+    REQUEST.general.getGateways().then((result) => {
       if (result.success) {
         const updateGatewayList = result.gateways;
 

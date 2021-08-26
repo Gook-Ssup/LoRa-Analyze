@@ -1,12 +1,33 @@
 import axios from "axios";
 
-const shared_url = "/v0/api"
+const shared_url = "/v0/api";
 
-// TESTING
-async function MAP_GET_GATEWAYS() {
+// Gateways
+async function GENERAL_GET_GATEWAYS() {
   const API_REQUEST = {
     method: "GET",
-    url: shared_url + "/map/gateways",
+    url: shared_url + "/general/gateways",
+    headers: {
+      // 'x-access-token': accessToken,
+    },
+  };
+  try {
+    const result = await axios(API_REQUEST);
+    return result.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function GENERAL_ADD_GATEWAY({ name, latitude, longitude }) {
+  const API_REQUEST = {
+    method: "PUT",
+    url: shared_url + "/general/gateway",
+    data: {
+      name,
+      latitude,
+      longitude,
+    },
     headers: {
       // 'x-access-token': accessToken,
     },
@@ -22,9 +43,10 @@ async function MAP_GET_GATEWAYS() {
 // !AUTH
 
 const REQUEST = {
-  map: {
-      getGateways: MAP_GET_GATEWAYS
-  }
+  general: {
+    getGateways: GENERAL_GET_GATEWAYS,
+    addGateway: GENERAL_ADD_GATEWAY,
+  },
 };
 
 export default REQUEST;

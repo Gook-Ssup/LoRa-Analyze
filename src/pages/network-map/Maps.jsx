@@ -1,11 +1,22 @@
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from 'leaflet';
 import "leaflet/dist/leaflet.css";
 
-// local
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import REQUEST from "REQUEST/v0";
 
+let DefaultIcon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow
+});
+
+// local
+L.Marker.prototype.options.icon = DefaultIcon;
+
 function Maps() {
+  
   const [view, setView] = useState({
     latitude: 35.235102456647034,
     longitude: 129.0828258896565,

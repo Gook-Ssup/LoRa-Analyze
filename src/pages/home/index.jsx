@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 // local
 import PageContainer from "shared/PageContainer";
 
+// shared
+import GookSsup from "img/gook-ssup.png";
 
 const MainHeader = styled.div`
   padding: 100px 0px;
@@ -29,18 +31,21 @@ const MainBody = styled.div`
 const Home = () => {
   return (
     <PageContainer>
-        <MainHeader>
-          <MainTitle>Lora Analyze</MainTitle>
-        </MainHeader>
-        <MainBody>
-          <Button
-            style={{ margin: "auto", borderRadius: "50%", paddingLeft: "15px" }}
-          >
-		  	<Link to="/network-map" >
-				<Send style={{ color: "#5577dd", fontSize: 50 }} />
-		  	</Link>
-          </Button>
-        </MainBody>
+      <MainHeader>
+        <div style={{ textAlign:'center' }}>
+          <img src={GookSsup}></img>
+        </div>
+        {/* <MainTitle>Lora Analyze</MainTitle> */}
+      </MainHeader>
+      <MainBody>
+        <Button
+          style={{ margin: "auto", borderRadius: "50%", paddingLeft: "15px" }}
+        >
+          <Link to="/network-map">
+            <Send style={{ color: "#5577dd", fontSize: 50 }} />
+          </Link>
+        </Button>
+      </MainBody>
     </PageContainer>
   );
 };

@@ -1,28 +1,44 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+
 import L from 'leaflet';
 import "leaflet/dist/leaflet.css";
-
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+
+import * as d3 from 'd3';
+
+// shared
 import REQUEST from "REQUEST/v0";
+
+// local
+import MarkerPopup from './MarkerPopup';
+
 
 let DefaultIcon = L.icon({
   iconUrl: icon,
   shadowUrl: iconShadow
 });
-
-// local
 L.Marker.prototype.options.icon = DefaultIcon;
 
 function Maps() {
-  
+  const designRef = useRef();
+
   const [view, setView] = useState({
     latitude: 35.235102456647034,
     longitude: 129.0828258896565,
   });
   const [gatewayList, setGatewayList] = useState([]);
   const [reload, setReload] = useState(false);
+
+  useEffect(() => {
+    const currentElement = designRef.current;
+    const documentElement = d3.select(currentElement)
+    .call(g => g.select("svg").remove())
+    .append('svg')
+    .attr('viewBox', `0,0,${100},${100}`);
+    // documentElement.createElement('p');
+}, [])
 
   useEffect(() => {
     REQUEST.general.getGateways().then((result) => {
@@ -47,8 +63,9 @@ function Maps() {
   }, [reload]);
 
   let Markers = gatewayList.map((gateway, index) => (
-    <Marker key={gateway.id} position={[gateway.latitude, gateway.longitude]}>
-      <Popup>{gateway.name + '[' + gateway._id.toString() + ']'}</Popup>
+    <Marker key={gateway._id} position={[gateway.latitude, gateway.longitude]}>
+      {/* <Popup ref={designRef}>{gateway.name + '[' + gateway._id.toString() + ']'}</Popup> */}
+      <MarkerPopup gateway={gateway}/>
     </Marker>
   ));
 

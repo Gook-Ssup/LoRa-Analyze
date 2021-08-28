@@ -58,7 +58,7 @@ const TopHeader = () => {
         <Tabs value={value} onChange={handleChange}>
           <Tab label="Home" icon={<Home />} onClick={()=>{onClickLink("/")}}/>
           <Tab label="Map" icon={<Map />} onClick={()=>{onClickLink("/network-map")}}/>
-          <Tab label="Analyze" icon={<Poll />} />
+          <Tab label="Analyze" icon={<Poll />} onClick={()=>{onClickLink("/analyze")}}/>
           <Tab label="Gateways" icon={<PinDrop />} onClick={()=>{onClickLink("/gateways")}}/>
         </Tabs>
         <LoginButton variant="outlined">

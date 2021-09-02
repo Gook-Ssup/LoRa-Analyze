@@ -18,9 +18,9 @@ import {
 import AddLocationIcon from "@material-ui/icons/AddLocation";
 
 // shared
+import REQUEST from "REQUEST/v0";
 import PageContainer from "shared/PageContainer";
 import PageCard from "shared/PageCard";
-import REQUEST from "REQUEST/v0";
 import MessageModal from "shared/MessageModal";
 import ErrorMessageModal from "shared/ErrorMessageModal";
 

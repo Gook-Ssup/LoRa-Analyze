@@ -40,12 +40,31 @@ async function GENERAL_ADD_GATEWAY({ name, latitude, longitude }) {
   }
 }
 
-// !AUTH
+// !Gateways
+
+// Signal
+async function GENERAL_GET_SIGNALS() {
+  const API_REQUEST = {
+    method: "GET",
+    url: shared_url + "/general/signals",
+    headers: {
+      // 'x-access-token': accessToken,
+    },
+  };
+  try {
+    const result = await axios(API_REQUEST);
+    return result.data;
+  } catch (error) {
+    throw error;
+  }
+}
+// !Signal
 
 const REQUEST = {
   general: {
     getGateways: GENERAL_GET_GATEWAYS,
     addGateway: GENERAL_ADD_GATEWAY,
+    getSignals: GENERAL_GET_SIGNALS,
   },
 };
 

@@ -8,7 +8,7 @@ import ScatterChart from "./ScatterChart";
 
 const Analyze = () => {
   return <PageContainer>
-      <LineChart></LineChart>
+      {/* <LineChart></LineChart> */}
       <ScatterChart></ScatterChart>
   </PageContainer>;
 };

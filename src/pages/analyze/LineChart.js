@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
-import "./LineChart.css";
+import "./Chart.css";
 
 const LineChart = () => {
   const refChart = useRef();
@@ -31,11 +31,11 @@ const LineChart = () => {
         // style
         const margin = { top: 50, right: 30, bottom: 30, left: 30 };
         const width =
-          parseInt(d3.select("#d3demo").style("width")) -
+          parseInt(d3.select("#chartContainer").style("width")) -
           margin.left -
           margin.right;
         const height =
-          parseInt(d3.select("#d3demo").style("height")) -
+          parseInt(d3.select("#chartContainer").style("height")) -
           margin.top -
           margin.bottom;
 
@@ -94,7 +94,7 @@ const LineChart = () => {
   });
 
   return (
-    <div id="d3demo">
+    <div id="chartContainer">
       <svg ref={refChart}></svg>
     </div>
   );

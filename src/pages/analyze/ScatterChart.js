@@ -1,14 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import "./Chart.css";
+import { DateTime } from 'luxon';
 
 // shared
 import REQUEST from "REQUEST/v0";
-import { RestoreOutlined } from "@material-ui/icons";
+import { DnsTwoTone, RestoreOutlined } from "@material-ui/icons";
 
 const ScatterChart = () => {
   const refChart = useRef();
   const parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S");
+  const timeFormat = "%Y-%m-%dT%H:%M:%S";
 
   useEffect(() => {
     // get data
@@ -19,10 +21,12 @@ const ScatterChart = () => {
       const timeToGateway = [];
       result.signals.map((signal) => {
         timeToGateway.push({
-          time: parseTime(signal.time.slice(0, 19)),
+          // time: parseTime(signal.time.slice(0, 19)),
+          time: DateTime.fromISO(signal.time),
           gateway: signal.gateway,
         });
       });
+      console.log(timeToGateway[0].time.toString());
 
       // style
       const margin = { top: 50, right: 30, bottom: 30, left: 30 };
@@ -48,9 +52,15 @@ const ScatterChart = () => {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
       // x
-      let timeStart = new Date();
-      let timeEnd = new Date(timeStart.valueOf());
-      timeStart.setHours(timeStart.getHours() - 12);
+      // let timeStart = new Date();
+      // let timeEnd = new Date(timeStart.valueOf());
+      // timeStart.setHours(timeStart.getHours() - 12);
+
+      let timeStart = DateTime.now().toUTC();
+      let timeEnd = DateTime.now().toUTC();
+
+      timeStart = timeStart.minus({minutes:1});
+
       const x = d3
         .scaleTime()
         .domain([timeStart, timeEnd]).nice()

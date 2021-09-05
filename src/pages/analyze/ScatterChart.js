@@ -13,10 +13,14 @@ const ScatterChart = () => {
   const timeFormat = "%Y-%m-%dT%H:%M:%S";
 
   useEffect(() => {
+    let timeStart = DateTime.now().toUTC();
+    let timeEnd = DateTime.now().toUTC();
+    timeStart = timeStart.minus({minutes:1});
+
     // get data
-    REQUEST.general.getSignals().then((result) => {
+    REQUEST.general.getSignals({timeSince:timeStart}).then((result) => {
       if (result.success) {
-      }
+  
       // parse times (x axis)
       const timeToGateway = [];
       result.signals.map((signal) => {
@@ -26,7 +30,8 @@ const ScatterChart = () => {
           gateway: signal.gateway,
         });
       });
-      console.log(timeToGateway[0].time.toString());
+      console.log(timeToGateway);
+
 
       // style
       const margin = { top: 50, right: 30, bottom: 30, left: 30 };
@@ -51,15 +56,6 @@ const ScatterChart = () => {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      // x
-      // let timeStart = new Date();
-      // let timeEnd = new Date(timeStart.valueOf());
-      // timeStart.setHours(timeStart.getHours() - 12);
-
-      let timeStart = DateTime.now().toUTC();
-      let timeEnd = DateTime.now().toUTC();
-
-      timeStart = timeStart.minus({minutes:1});
 
       const x = d3
         .scaleTime()
@@ -99,6 +95,9 @@ const ScatterChart = () => {
         })
         .attr("r", 3)
         .style("fill", "#cc5342");
+
+      }
+
     });
   }, []);
 

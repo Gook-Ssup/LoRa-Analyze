@@ -49,7 +49,13 @@ router.put("/gateway", async (req, res, next) => {
 // SIGNAL
 router.get("/signals", async (req, res, next) => {
   try {
-    Signal.find().then((signals) => {
+    const { timeSince } = req.query;
+    
+    Signal.find({
+      'time':{
+        $gte: timeSince
+      }
+    }).then((signals) => {
       console.log(signals);
       return res.json({
         success: true,

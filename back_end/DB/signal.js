@@ -8,6 +8,8 @@ const singalSchema = new mongoose.Schema({
   sample_rate: Number,
   length: Number,
   time: Date,
+  bin_num: Number,
+  mag_max: Number,
   real: [Number],
   imag: [Number],
 });

@@ -1,6 +1,7 @@
 const express = require("express");
 // TODO : change path
 const Gateway = require("../../../DB/gateway.js");
+const Signal = require("../../../DB/signal.js");
 //
 
 const router = express.Router();
@@ -44,5 +45,28 @@ router.put("/gateway", async (req, res, next) => {
     return res.json({ success: false });
   }
 });
+
+// SIGNAL
+router.get("/signals", async (req, res, next) => {
+  try {
+    const { timeSince } = req.query;
+    
+    Signal.find({
+      'time':{
+        $gte: timeSince
+      }
+    }).then((signals) => {
+      console.log(signals);
+      return res.json({
+        success: true,
+        signals,
+      });
+    });
+  } catch (error) {
+    console.log(error);
+    return res.json({ success: false });
+  }
+});
+// !SIGNAL
 
 module.exports = router;

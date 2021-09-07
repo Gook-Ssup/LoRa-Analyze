@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
-import "./LineChart.css";
+import "./Chart.css";
 
 const LineChart = () => {
   const refChart = useRef();
@@ -26,16 +26,16 @@ const LineChart = () => {
           const counts = { time: parseData(the_time), count: count };
           CountsByTime.push(counts);
         });
-        console.log(CountsByTime);
+        // console.log(CountsByTime);
 
         // style
         const margin = { top: 50, right: 30, bottom: 30, left: 30 };
         const width =
-          parseInt(d3.select("#d3demo").style("width")) -
+          parseInt(d3.select("#chartContainer").style("width")) -
           margin.left -
           margin.right;
         const height =
-          parseInt(d3.select("#d3demo").style("height")) -
+          parseInt(d3.select("#chartContainer").style("height")) -
           margin.top -
           margin.bottom;
 
@@ -71,30 +71,30 @@ const LineChart = () => {
         });
         const y = d3.scaleLinear().domain([0, max]).range([height, 0]);
         svg.append("g").call(d3.axisLeft(y));
-        
-        // graph
-        svg
-          .append("path")
-          .datum(CountsByTime)
-          .attr("fill", "none")
-          .attr("stroke", "white")
-          .attr("stroke-width", 3)
-          .attr(
-            "d",
-            d3
-              .line()
-              .x(function (d) {
-                return x(d.time);
-              })
-              .y(function (d) {
-                return y(d.count);
-              })
-          );
+
+        //   // graph
+          svg
+            .append("path")
+            .datum(CountsByTime)
+            .attr("fill", "none")
+            .attr("stroke", "white")
+            .attr("stroke-width", 3)
+            .attr(
+              "d",
+              d3
+                .line()
+                .x(function (d) {
+                  return x(d.time);
+                })
+                .y(function (d) {
+                  return y(d.count);
+                })
+            );
       });
   });
 
   return (
-    <div id="d3demo">
+    <div id="chartContainer">
       <svg ref={refChart}></svg>
     </div>
   );

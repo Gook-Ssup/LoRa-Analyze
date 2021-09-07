@@ -33,7 +33,8 @@ function Maps() {
 
   useEffect(() => {
     const currentElement = designRef.current;
-    const documentElement = d3.select(currentElement)
+    const documentElement = d3.select(currentElement);
+    documentElement
     .call(g => g.select("svg").remove())
     .append('svg')
     .attr('viewBox', `0,0,${100},${100}`);

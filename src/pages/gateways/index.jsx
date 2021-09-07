@@ -18,17 +18,13 @@ import {
 import AddLocationIcon from "@material-ui/icons/AddLocation";
 
 // shared
+import REQUEST from "REQUEST/v0";
 import PageContainer from "shared/PageContainer";
 import PageCard from "shared/PageCard";
-import REQUEST from "REQUEST/v0";
 import MessageModal from "shared/MessageModal";
 import ErrorMessageModal from "shared/ErrorMessageModal";
 
 const Gateways = () => {
-  function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-  }
-
   const MessageModalRef = useRef();
   const ErrorMessageModalRef = useRef();
 
@@ -73,13 +69,13 @@ const Gateways = () => {
   const handleBlur = (e) => {
     const { name, value } = e.target;
     console.log(name, value);
-    if (value.length == 0) {
+    if (value.length === 0) {
       let newFormError = {
         ...formError,
         [name]: { isError: true, errorMsg: "값을 입력해주십시오." },
       };
       setFormError(newFormError);
-    } else if ((name == "latitude" || name == "longitude") && isNaN(value)) {
+    } else if ((name === "latitude" || name === "longitude") && isNaN(value)) {
       let newFormError = {
         ...formError,
         [name]: { isError: true, errorMsg: "숫자를 입력해주십시오." },

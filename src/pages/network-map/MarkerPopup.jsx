@@ -1,14 +1,14 @@
 import React from "react";
 import { Popup } from "react-leaflet";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@material-ui/core";
-import Paper from "@material-ui/core/Paper";
+// import {
+//   Table,
+//   TableBody,
+//   TableCell,
+//   TableContainer,
+//   TableHead,
+//   TableRow,
+// } from "@material-ui/core";
+// import Paper from "@material-ui/core/Paper";
 
 const MarkerPopup = ({ gateway }) => {
 

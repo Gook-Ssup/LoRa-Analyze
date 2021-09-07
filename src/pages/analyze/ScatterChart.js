@@ -3,11 +3,9 @@ import * as d3 from "d3";
 import "./Chart.css";
 import { DateTime } from "luxon";
 
-import { PinDrop } from "@material-ui/icons";
-
 // shared
 import REQUEST from "REQUEST/v0";
-import { DnsTwoTone, RestoreOutlined } from "@material-ui/icons";
+import { DnsTwoTone, PinDrop, RestoreOutlined } from "@material-ui/icons";
 
 function hashCode(str) {
   // Java String#hashCode
@@ -26,8 +24,7 @@ function intToRGB(i) {
 
 const ScatterChart = () => {
   const refChart = useRef();
-  const parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S");
-  const timeFormat = "%Y-%m-%dT%H:%M:%S";
+  // const timeFormat = "%Y-%m-%dT%H:%M:%S";
   const [signals, setSignals] = useState([]);
 
   useEffect(() => {
@@ -48,6 +45,7 @@ const ScatterChart = () => {
             bin_num: signal.bin_num,
             mag_max: signal.mag_max,
           });
+          return signal;
         });
         setSignals(timeLineSignal);
         console.log(timeLineSignal);
@@ -133,11 +131,12 @@ const ScatterChart = () => {
   }, []);
 
   console.log(signals);
-  const gateways = [... new Set(signals.map( (signal) => signal.gateway))];
+  const gateways = [...new Set(signals.map((signal) => signal.gateway))];
   const gatewayInfo = gateways.map((gateway, index) => {
     return (
       <div key={index}>
-        <PinDrop style={{color: intToRGB(hashCode(gateway))}}/><span>{gateway}</span>
+        <DnsTwoTone style={{ color: intToRGB(hashCode(gateway)) }} />
+        <span>{gateway}</span>
       </div>
     );
   });

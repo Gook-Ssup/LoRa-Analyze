@@ -3,6 +3,8 @@ import * as d3 from "d3";
 import "./Chart.css";
 import { DateTime } from "luxon";
 
+import { PinDrop } from "@material-ui/icons";
+
 // shared
 import REQUEST from "REQUEST/v0";
 import { DnsTwoTone, RestoreOutlined } from "@material-ui/icons";
@@ -94,7 +96,8 @@ const ScatterChart = () => {
           .call(d3.axisBottom(x));
 
         // y
-        const binMax = d3.max(timeLineSignal, (signal) => signal.bin_num);
+        // const binMax = d3.max(timeLineSignal, (signal) => signal.bin_num);
+        const binMax = 8000;
 
         const y = d3
           .scaleLinear()
@@ -118,7 +121,10 @@ const ScatterChart = () => {
           .attr("cy", function (signal) {
             return y(signal.bin_num);
           })
-          .attr("r", 3)
+          // .attr("r", 3)
+          .attr("r", function (signal) {
+            return signal.mag_max / 50;
+          })
           .style("fill", function (signal) {
             return intToRGB(hashCode(signal.gateway));
           });
@@ -126,25 +132,20 @@ const ScatterChart = () => {
     });
   }, []);
 
-  // console.log(signals);
-  // const gatewayInfo = signals.map((signal) => {
-  //   return (
-  //     <div>
-  //       <circle
-  //         r={3}
-  //         cx={0}
-  //         cy={3}
-  //         style={{ fill: intToRGB(hashCode(signal.gateway)) }}
-  //       ></circle>
-  //       <span>signal.gateway</span>
-  //     </div>
-  //   );
-  // });
+  console.log(signals);
+  const gateways = [... new Set(signals.map( (signal) => signal.gateway))];
+  const gatewayInfo = gateways.map((gateway, index) => {
+    return (
+      <div key={index}>
+        <PinDrop style={{color: intToRGB(hashCode(gateway))}}/><span>{gateway}</span>
+      </div>
+    );
+  });
 
   return (
     <div id="chartContainer">
       <svg ref={refChart}></svg>
-      {/* {gatewayInfo} */}
+      {gatewayInfo}
     </div>
   );
 };
